@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using BlazorServer.Data;
-
+//<Chapter2 Server Program>
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -29,3 +27,4 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 app.Run();
+//</Chapter2 Server Program>
