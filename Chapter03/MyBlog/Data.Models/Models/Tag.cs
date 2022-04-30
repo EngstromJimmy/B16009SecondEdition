@@ -1,4 +1,4 @@
-﻿namespace MyBlog.Data.Models;
+﻿namespace Data.Models;
 public class Tag
 {
     public int Id { get; set; }
