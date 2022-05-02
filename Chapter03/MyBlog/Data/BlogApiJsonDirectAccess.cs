@@ -83,7 +83,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
         }
         catch { }
     }
-    //<ManipulateData>
+    //</ManipulateData>
     //<GetBlogPosts>
     public async Task<List<BlogPost>> GetBlogPostsAsync(int numberofposts, int startindex)
     {
@@ -122,7 +122,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
             throw new Exception("Categories not found");
         return _categories.First(b => b.Id == id);
     }
-    //<GetCategories>
+    //</GetCategories>
     //<GetTags>
     public async Task<List<Tag>> GetTagsAsync()
     {
@@ -137,7 +137,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
             throw new Exception("Tags not found");
         return _tags.First(b => b.Id == id);
     }
-    //<GetTags>
+    //</GetTags>
     //<Save>
     public async Task<BlogPost> SaveBlogPostAsync(BlogPost item)
     {
