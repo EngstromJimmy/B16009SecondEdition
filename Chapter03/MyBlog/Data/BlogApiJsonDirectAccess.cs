@@ -60,7 +60,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
     //</LoadData>
 
     //<ManipulateData>
-    private async Task Save<T>(List<T>? list, string folder, string filename, T item)
+    private async Task SaveAsync<T>(List<T>? list, string folder, string filename, T item)
     {
         var filepath = $@"{_settings.DataPath}\{folder}\{filename}";
         await File.WriteAllTextAsync(filepath, JsonSerializer.Serialize<T>(item));
@@ -70,7 +70,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
         }
         list.Add(item);
     }
-    private void Delete<T>(List<T>? list, string folder, string filename, T item)
+    private void DeleteAsync<T>(List<T>? list, string folder, string filename, T item)
     {
         var filepath = $@"{_settings.DataPath}\{folder}\{filename}";
         try
@@ -145,7 +145,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
         {
             item.Id = Guid.NewGuid().ToString();
         }
-        await Save<BlogPost>(_blogPosts, _settings.BlogPostsFolder, $"{item.Id}.json", item);
+        await SaveAsync<BlogPost>(_blogPosts, _settings.BlogPostsFolder, $"{item.Id}.json", item);
         return item;
     }
 
@@ -155,7 +155,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
         {
             item.Id = Guid.NewGuid().ToString();
         }
-        await Save<Category>(_categories, _settings.CategoriesFolder, $"{item.Id}.json", item);
+        await SaveAsync<Category>(_categories, _settings.CategoriesFolder, $"{item.Id}.json", item);
         return item;
     }
 
@@ -165,31 +165,31 @@ public class BlogApiJsonDirectAccess : IBlogApi
         {
             item.Id = Guid.NewGuid().ToString();
         }
-        await Save<Tag>(_tags, _settings.TagsFolder, $"{item.Id}.json", item);
+        await SaveAsync<Tag>(_tags, _settings.TagsFolder, $"{item.Id}.json", item);
         return item;
     }
     //</Save>
     //<Delete>
     public Task DeleteBlogPostAsync(BlogPost item)
     {
-        Delete(_blogPosts, _settings.BlogPostsFolder, $"{item}.json", item);
+        DeleteAsync(_blogPosts, _settings.BlogPostsFolder, $"{item}.json", item);
         return Task.CompletedTask;
     }
 
     public Task DeleteCategoryAsync(Category item)
     {
-        Delete(_categories, _settings.CategoriesFolder, $"{item}.json", item);
+        DeleteAsync(_categories, _settings.CategoriesFolder, $"{item}.json", item);
         return Task.CompletedTask;
     }
 
     public Task DeleteTagAsync(Tag item)
     {
-        Delete(_tags, _settings.TagsFolder, $"{item}.json", item);
+        DeleteAsync(_tags, _settings.TagsFolder, $"{item}.json", item);
         return Task.CompletedTask;
     }
     //</Delete>
     //<Cache>
-    public Task InvalidateCache()
+    public Task InvalidateCacheAsync()
     {
         _blogPosts = null;
         _tags = null;
