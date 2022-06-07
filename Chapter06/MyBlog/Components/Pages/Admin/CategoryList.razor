@@ -1,4 +1,5 @@
 ﻿@page "/admin/categories"
+@using Components.RazorComponents
 @inject IBlogApi _api
 <h3>Categories</h3>
 <EditForm OnValidSubmit="Save" Model="Item">
@@ -59,4 +60,5 @@
         catch { }
         return Task.CompletedTask;
     }
-}@*</Chapter6 CategoryCode>*@
+}
+@*</Chapter6 CategoryCode>*@
