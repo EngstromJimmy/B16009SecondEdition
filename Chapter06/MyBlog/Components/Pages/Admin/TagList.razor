@@ -11,6 +11,17 @@
     <ValidationMessage For="@(()=>Item.Name)" />
     <button class="btn btn-success" type="submit">Save</button>
 </EditForm>
+<ItemList Items="Items" DeleteEvent="@Delete" SelectEvent="@Select" ItemType="Tag">
+    <ItemTemplate>
+        @{
+            var item = context as Tag;
+            if (item != null)
+            {
+                @item.Name;
+            }
+        }
+    </ItemTemplate>
+</ItemList>
 
 @*<Chapter6 TagCode>*@
 @code {
