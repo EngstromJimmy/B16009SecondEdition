@@ -80,7 +80,10 @@ public class BlogApiJsonDirectAccess : IBlogApi
         {
             list = new();
         }
-        list.Add(item);
+        if (!list.Contains(item))
+        {
+            list.Add(item);
+        }
     }
     private void DeleteAsync<T>(List<T>? list, string folder, string filename, T item)
     {
@@ -184,19 +187,19 @@ public class BlogApiJsonDirectAccess : IBlogApi
     //<Delete>
     public Task DeleteBlogPostAsync(BlogPost item)
     {
-        DeleteAsync(_blogPosts, _settings.BlogPostsFolder, $"{item}.json", item);
+        DeleteAsync(_blogPosts, _settings.BlogPostsFolder, $"{item.Id}.json", item);
         return Task.CompletedTask;
     }
 
     public Task DeleteCategoryAsync(Category item)
     {
-        DeleteAsync(_categories, _settings.CategoriesFolder, $"{item}.json", item);
+        DeleteAsync(_categories, _settings.CategoriesFolder, $"{item.Id}.json", item);
         return Task.CompletedTask;
     }
 
     public Task DeleteTagAsync(Tag item)
     {
-        DeleteAsync(_tags, _settings.TagsFolder, $"{item}.json", item);
+        DeleteAsync(_tags, _settings.TagsFolder, $"{item.Id}.json", item);
         return Task.CompletedTask;
     }
     //</Delete>

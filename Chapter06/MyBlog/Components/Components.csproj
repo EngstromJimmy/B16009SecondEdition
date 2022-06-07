@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Data.Models\Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+  </ItemGroup>
+
 </Project>
