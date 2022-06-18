@@ -1,3 +1,6 @@
+using BlazorWebAssembly.Server.Endpoints;
+using Data;
+using Data.Models.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +20,11 @@ builder.Services.AddScoped<IBlogApi, BlogApiJsonDirectAccess>();
 //</Chapter7 BlogApiJsonDirectAccessSetting>
 
 var app = builder.Build();
+//<Chapter7 MapApis>
+app.MapBlogPostApi();
+app.MapCategoryApi();
+app.MapTagApi();
+//</Chapter7 MapApis>
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

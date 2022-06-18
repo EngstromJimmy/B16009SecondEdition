@@ -1,0 +1,162 @@
+﻿using Data.Extensions;
+using Data.Models;
+using Data.Models.Interfaces;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using System.Net.Http.Json;
+using System.Text.Json;
+
+namespace Data;
+
+public class BlogApiWebClient : IBlogApi
+{
+
+    private readonly IHttpClientFactory _factory;
+    public BlogApiWebClient(IHttpClientFactory factory)
+    {
+        _factory = factory;
+    }
+
+    //<Chapter7 GetBlogPostCalls>
+    public async Task<BlogPost?> GetBlogPostAsync(string id)
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<BlogPost>($"api/BlogPosts/{id}");
+    }
+
+    public async Task<int> GetBlogPostCountAsync()
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<int>("api/BlogPostCount");
+    }
+
+    public async Task<List<BlogPost>?> GetBlogPostsAsync(int numberofposts, int startindex)
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<List<BlogPost>>($"api/BlogPosts?numberofposts={numberofposts}&startindex={startindex}");
+    }
+    //</Chapter7 GetBlogPostCalls>
+
+    //<Chapter7 SaveDeleteBlogPostCalls>
+    public async Task<BlogPost?> SaveBlogPostAsync(BlogPost item)
+    {
+        try
+        {
+            var httpclient = _factory.CreateClient("Authenticated");
+            var response = await httpclient.PutAsJsonAsync<BlogPost>
+               ("api/BlogPosts", item);
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<BlogPost>(json);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        return null;
+    }
+    public async Task DeleteBlogPostAsync(BlogPost item)
+    {
+        try
+        {
+            var httpclient = _factory.CreateClient("Authenticated");
+            await httpclient.DeleteAsJsonAsync<BlogPost>("api/BlogPosts", item);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+    //</Chapter7 SaveDeleteBlogPostCalls>
+
+    //<Chapter7 CategoriesCalls>
+    public async Task<List<Category>?> GetCategoriesAsync()
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<List<Category>>($"api/Categories");
+    }
+
+    public async Task<Category?> GetCategoryAsync(string id)
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<Category>($"api/Categories/{id}");
+    }
+
+    public async Task DeleteCategoryAsync(Category item)
+    {
+        try
+        {
+            var httpclient = _factory.CreateClient("Authenticated");
+            await httpclient.DeleteAsJsonAsync<Category>("api/Categories", item);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+
+    public async Task<Category?> SaveCategoryAsync(Category item)
+    {
+        try
+        {
+            var httpclient = _factory.CreateClient("Authenticated");
+            var response = await httpclient.PutAsJsonAsync<Category>("api/Categories", item);
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Category>(json);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        return null;
+
+    }
+    //<Chapter7 CategoriesCalls>
+
+    //<Chapter7 TagsCalls>
+    public async Task<Tag?> GetTagAsync(string id)
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<Tag>($"api/Tags/{id}");
+    }
+
+    public async Task<List<Tag>?> GetTagsAsync()
+    {
+        var httpclient = _factory.CreateClient("Public");
+        return await httpclient.GetFromJsonAsync<List<Tag>>($"api/Tags");
+    }
+    public async Task DeleteTagAsync(Tag item)
+    {
+        try
+        {
+            var httpclient = _factory.CreateClient("Authenticated");
+            await httpclient.DeleteAsJsonAsync<Tag>("api/Tags", item);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+    }
+    public async Task<Tag?> SaveTagAsync(Tag item)
+    {
+        try
+        {
+            var httpclient = _factory.CreateClient("Authenticated");
+            var response = await httpclient.PutAsJsonAsync<Tag>("api/Tags", item);
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Tag>(json);
+        }
+        catch (AccessTokenNotAvailableException exception)
+        {
+            exception.Redirect();
+        }
+        return null;
+    }
+    //</Chapter7 TagsCalls>
+
+
+
+
+    public Task InvalidateCacheAsync()
+    {
+        throw new NotImplementedException();
+    }
+}

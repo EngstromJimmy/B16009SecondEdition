@@ -100,13 +100,13 @@ public class BlogApiJsonDirectAccess : IBlogApi
     }
     //</ManipulateData>
     //<GetBlogPosts>
-    public async Task<List<BlogPost>> GetBlogPostsAsync(int numberofposts, int startindex)
+    public async Task<List<BlogPost>?> GetBlogPostsAsync(int numberofposts, int startindex)
     {
         await LoadBlogPostsAsync();
         return _blogPosts ?? new();
     }
 
-    public async Task<BlogPost> GetBlogPostAsync(string id)
+    public async Task<BlogPost?> GetBlogPostAsync(string id)
     {
         await LoadBlogPostsAsync();
         if (_blogPosts == null)
@@ -124,13 +124,13 @@ public class BlogApiJsonDirectAccess : IBlogApi
     }
     //</GetBlogPosts>
     //<GetCategories>
-    public async Task<List<Category>> GetCategoriesAsync()
+    public async Task<List<Category>?> GetCategoriesAsync()
     {
         await LoadCategoriesAsync();
         return _categories ?? new();
     }
 
-    public async Task<Category> GetCategoryAsync(string id)
+    public async Task<Category?> GetCategoryAsync(string id)
     {
         await LoadCategoriesAsync();
         if (_categories == null)
@@ -139,13 +139,13 @@ public class BlogApiJsonDirectAccess : IBlogApi
     }
     //</GetCategories>
     //<GetTags>
-    public async Task<List<Tag>> GetTagsAsync()
+    public async Task<List<Tag>?> GetTagsAsync()
     {
         await LoadTagsAsync();
         return _tags ?? new();
     }
 
-    public async Task<Tag> GetTagAsync(string id)
+    public async Task<Tag?> GetTagAsync(string id)
     {
         await LoadTagsAsync();
         if (_tags == null)
@@ -154,7 +154,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
     }
     //</GetTags>
     //<Save>
-    public async Task<BlogPost> SaveBlogPostAsync(BlogPost item)
+    public async Task<BlogPost?> SaveBlogPostAsync(BlogPost item)
     {
         if (item.Id == null)
         {
@@ -164,7 +164,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
         return item;
     }
 
-    public async Task<Category> SaveCategoryAsync(Category item)
+    public async Task<Category?> SaveCategoryAsync(Category item)
     {
         if (item.Id == null)
         {
@@ -174,7 +174,7 @@ public class BlogApiJsonDirectAccess : IBlogApi
         return item;
     }
 
-    public async Task<Tag> SaveTagAsync(Tag item)
+    public async Task<Tag?> SaveTagAsync(Tag item)
     {
         if (item.Id == null)
         {
