@@ -64,5 +64,42 @@ namespace MyBlog.Test
             Assert.True(tag.Name == item.Name);
 
         }
+        [Fact]
+        public async Task DeleteTagTest()
+        {
+            Tag item = new();
+            item.Id = "TagToBeDelete";
+            item.Name = "Delete me";
+            await _fixture.Api.SaveTagAsync(item);
+
+            var tag = await _fixture.Api.GetTagAsync(item.Id);
+            Assert.True(tag != null);
+            Assert.True(tag.Id == item.Id);
+            Assert.True(tag.Name == item.Name);
+
+            await _fixture.Api.DeleteTagAsync(item.Id);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _fixture.Api.GetTagAsync(item.Id));
+
+        }
+
+        [Fact]
+        public async Task DeleteCategoryTest()
+        {
+            Category item = new();
+            item.Id = "CategoryToBeDelete";
+            item.Name = "Delete me";
+            await _fixture.Api.SaveCategoryAsync(item);
+
+            var category = await _fixture.Api.GetCategoryAsync(item.Id);
+            Assert.True(category != null);
+            Assert.True(category.Id == item.Id);
+            Assert.True(category.Name == item.Name);
+
+            await _fixture.Api.DeleteCategoryAsync(item.Id);
+
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await _fixture.Api.GetCategoryAsync(item.Id));
+
+        }
     }
 }

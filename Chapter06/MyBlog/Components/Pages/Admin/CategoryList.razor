@@ -35,7 +35,7 @@
     {
         try
         {
-            await _api.DeleteCategoryAsync(category);
+            await _api.DeleteCategoryAsync(category.Id);
             Items.Remove(category);
         }
         catch { }

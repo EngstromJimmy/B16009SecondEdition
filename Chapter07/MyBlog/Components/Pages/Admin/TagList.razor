@@ -37,7 +37,7 @@
     {
         try
         {
-            await _api.DeleteTagAsync(tag);
+            await _api.DeleteTagAsync(tag.Id);
             Items.Remove(tag);
         }
         catch { }

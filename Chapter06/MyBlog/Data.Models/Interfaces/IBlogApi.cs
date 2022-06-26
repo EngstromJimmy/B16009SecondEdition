@@ -12,9 +12,9 @@ public interface IBlogApi
     Task<BlogPost?> SaveBlogPostAsync(BlogPost item);
     Task<Category?> SaveCategoryAsync(Category item);
     Task<Tag?> SaveTagAsync(Tag item);
-    Task DeleteBlogPostAsync(BlogPost item);
-    Task DeleteCategoryAsync(Category item);
-    Task DeleteTagAsync(Tag item);
+    Task DeleteBlogPostAsync(string id);
+    Task DeleteCategoryAsync(string id);
+    Task DeleteTagAsync(string id);
     Task InvalidateCacheAsync();
 
 }

@@ -85,16 +85,12 @@ public class BlogApiJsonDirectAccess : IBlogApi
             list.Add(item);
         }
     }
-    private void DeleteAsync<T>(List<T>? list, string folder, string filename, T item)
+    private void DeleteAsync<T>(List<T>? list, string folder, string id)
     {
-        var filepath = $@"{_settings.DataPath}\{folder}\{filename}";
+        var filepath = $@"{_settings.DataPath}\{folder}\{id}.json";
         try
         {
             File.Delete(filepath);
-            if (list != null)
-            {
-                list.Remove(item);
-            }
         }
         catch { }
     }
@@ -185,21 +181,45 @@ public class BlogApiJsonDirectAccess : IBlogApi
     }
     //</Save>
     //<Delete>
-    public Task DeleteBlogPostAsync(BlogPost item)
+    public Task DeleteBlogPostAsync(string id)
     {
-        DeleteAsync(_blogPosts, _settings.BlogPostsFolder, $"{item.Id}.json", item);
+        DeleteAsync(_blogPosts, _settings.BlogPostsFolder, id);
+        if (_blogPosts != null)
+        {
+            var item = _blogPosts.FirstOrDefault(b => b.Id == id);
+            if (item != null)
+            {
+                _blogPosts.Remove(item);
+            }
+        }
         return Task.CompletedTask;
     }
 
-    public Task DeleteCategoryAsync(Category item)
+    public Task DeleteCategoryAsync(string id)
     {
-        DeleteAsync(_categories, _settings.CategoriesFolder, $"{item.Id}.json", item);
+        DeleteAsync(_categories, _settings.CategoriesFolder, id);
+        if (_categories != null)
+        {
+            var item = _categories.FirstOrDefault(b => b.Id == id);
+            if (item != null)
+            {
+                _categories.Remove(item);
+            }
+        }
         return Task.CompletedTask;
     }
 
-    public Task DeleteTagAsync(Tag item)
+    public Task DeleteTagAsync(string id)
     {
-        DeleteAsync(_tags, _settings.TagsFolder, $"{item.Id}.json", item);
+        DeleteAsync(_tags, _settings.TagsFolder, id);
+        if (_tags != null)
+        {
+            var item = _tags.FirstOrDefault(b => b.Id == id);
+            if (item != null)
+            {
+                _tags.Remove(item);
+            }
+        }
         return Task.CompletedTask;
     }
     //</Delete>
