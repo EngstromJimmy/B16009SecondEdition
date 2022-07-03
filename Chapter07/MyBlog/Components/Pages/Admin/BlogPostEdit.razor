@@ -51,8 +51,8 @@
     [Parameter]
     public string? Id { get; set; }
     BlogPost Post { get; set; } = new BlogPost();
-    List<Category>? Categories { get; set; }
-    List<Tag>? Tags { get; set; }
+    List<Category> Categories { get; set; }=new();
+    List<Tag> Tags { get; set; }= new();
     string? selectedCategory = null;
     string? markDownAsHTML { get; set; }
     @*</Chapter6 Parameters>*@

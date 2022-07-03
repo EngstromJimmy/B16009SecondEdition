@@ -4,7 +4,7 @@ using Data.Models.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Configuration.AddJsonFile("appsettings.local.json", optional: true, reloadOnChange: true);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = $"https://{builder.Configuration["Auth0:Authority"]}"
         };
     });
-
+builder.Services.AddAuthorization();
 //<//Chapter8 Authentication>
 
 var app = builder.Build();
@@ -61,6 +61,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
