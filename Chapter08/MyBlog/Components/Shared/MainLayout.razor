@@ -1,5 +1,6 @@
-﻿@inherits LayoutComponentBase
-
+﻿@using Components.RazorComponents
+@inherits LayoutComponentBase
+@inject ILoginStatus status
 <div class="page">
     <div class="sidebar">
         <NavMenu />
@@ -7,15 +8,7 @@
 
     <main>
         <div class="top-row px-4">
-            <AuthorizeView>
-                <Authorized>
-                    <a href="logout">Log out</a>
-                </Authorized>
-                <NotAuthorized>
-                    <a href="login?redirectUri=/">Log in</a>
-                </NotAuthorized>
-            </AuthorizeView>
-
+            <DynamicComponent Type="@status.GetType()"/>
         </div>
 
         <article class="content px-4">

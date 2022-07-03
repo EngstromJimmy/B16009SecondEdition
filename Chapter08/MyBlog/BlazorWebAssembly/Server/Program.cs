@@ -1,6 +1,7 @@
 using BlazorWebAssembly.Server.Endpoints;
 using Data;
 using Data.Models.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,20 @@ builder.Services.AddOptions<BlogApiJsonDirectAccessSetting>()
     });
 builder.Services.AddScoped<IBlogApi, BlogApiJsonDirectAccess>();
 //</Chapter7 BlogApiJsonDirectAccessSetting>
+
+//<Chapter8 Authentication>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, c =>
+    {
+        c.Authority = $"https://{builder.Configuration["Auth0:Authority"]}";
+        c.TokenValidationParameters = new()
+        {
+            ValidAudience = builder.Configuration["Auth0:Audience"],
+            ValidIssuer = $"https://{builder.Configuration["Auth0:Authority"]}"
+        };
+    });
+
+//<//Chapter8 Authentication>
 
 var app = builder.Build();
 //<Chapter7 MapApis>
@@ -45,7 +60,7 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");

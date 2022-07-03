@@ -351,3 +351,4 @@ MigrationBackup/
 .ionide/
 
 *.local*.json
+appsettings.development.json

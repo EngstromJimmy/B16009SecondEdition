@@ -1,6 +1,7 @@
 //<Chapter8 Namespaces>
 using Auth0.AspNetCore.Authentication;
 using BlazorServer.Data;
+using Components.RazorComponents;
 using Data;
 using Data.Models.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -12,7 +13,12 @@ builder.Configuration.AddJsonFile("appsettings.local.json", optional: true, relo
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-//<Chapter3 BlogApiJsonDirectAccessSetting>
+
+//<Chapter8 LoginStatus>
+builder.Services.AddTransient<ILoginStatus, LoginStatus>();
+//</Chapter8 LoginStatus>
+
+//Chapter3 BlogApiJsonDirectAccessSetting>
 builder.Services.AddOptions<BlogApiJsonDirectAccessSetting>()
     .Configure(options =>
     {
@@ -51,7 +57,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 //</Chapter8 AddAuth>
 //<Chapter8 MinimalApis>
-app.MapGet("login", async (string redirectUri, HttpContext context) =>
+app.MapGet("authentication/login", async (string redirectUri, HttpContext context) =>
 {
     var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
          .WithRedirectUri(redirectUri)
@@ -59,7 +65,7 @@ app.MapGet("login", async (string redirectUri, HttpContext context) =>
 
     await context.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
 });
-app.MapGet("logout", async (HttpContext context) =>
+app.MapGet("authentication/logout", async (HttpContext context) =>
 {
     var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
          .WithRedirectUri("/")
