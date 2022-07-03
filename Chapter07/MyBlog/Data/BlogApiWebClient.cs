@@ -108,7 +108,7 @@ public class BlogApiWebClient : IBlogApi
         return null;
 
     }
-    //<Chapter7 CategoriesCalls>
+    //</Chapter7 CategoriesCalls>
 
     //<Chapter7 TagsCalls>
     public async Task<Tag?> GetTagAsync(string id)
