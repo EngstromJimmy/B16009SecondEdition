@@ -1,6 +1,9 @@
 ﻿@page "/admin/categories"
 @using Components.RazorComponents
 @inject IBlogApi _api
+@*<Chapter8 Authorize>*@
+@attribute [Authorize]
+@*</Chapter8 Authorize>*@
 <h3>Categories</h3>
 <EditForm OnValidSubmit="Save" Model="Item">
     <DataAnnotationsValidator />
@@ -30,7 +33,7 @@
         Items = await _api.GetCategoriesAsync();
         await base.OnInitializedAsync();
     }
-    
+
     private async Task Delete(Category category)
     {
         try
@@ -40,12 +43,13 @@
         }
         catch { }
     }
-    
+
     private async Task Save()
     {
         try
         {
             await _api.SaveCategoryAsync(Item);
+            Items = await _api.GetCategoriesAsync();
             Item = new Category();
         }
         catch { }

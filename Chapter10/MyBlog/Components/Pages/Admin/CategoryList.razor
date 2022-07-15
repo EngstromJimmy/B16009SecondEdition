@@ -33,7 +33,7 @@
         Items = await _api.GetCategoriesAsync();
         await base.OnInitializedAsync();
     }
-    
+
     private async Task Delete(Category category)
     {
         try
@@ -43,12 +43,13 @@
         }
         catch { }
     }
-    
+
     private async Task Save()
     {
         try
         {
             await _api.SaveCategoryAsync(Item);
+            Items = await _api.GetCategoriesAsync();
             Item = new Category();
         }
         catch { }

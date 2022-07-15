@@ -1,6 +1,9 @@
 ﻿@page "/admin/tags"
 @using Components.RazorComponents
 @inject IBlogApi _api
+@*<Chapter8 Authorize>*@
+@attribute [Authorize]
+@*</Chapter8 Authorize>*@
 <h3>Tags</h3>
 
 <EditForm OnValidSubmit="Save" Model="Item">
@@ -48,6 +51,7 @@
         try
         {
             await _api.SaveTagAsync(Item);
+            Items = await _api.GetTagsAsync();
             Item = new Tag();
         }
         catch { }

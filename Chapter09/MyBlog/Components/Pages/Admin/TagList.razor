@@ -51,6 +51,7 @@
         try
         {
             await _api.SaveTagAsync(Item);
+            Items = await _api.GetTagsAsync();
             Item = new Tag();
         }
         catch { }
