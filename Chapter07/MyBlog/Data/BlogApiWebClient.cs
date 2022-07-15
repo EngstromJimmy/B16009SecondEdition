@@ -84,7 +84,7 @@ public class BlogApiWebClient : IBlogApi
         try
         {
             var httpclient = _factory.CreateClient("Authenticated");
-            await httpclient.DeleteAsync($"api/Categories{id}");
+            await httpclient.DeleteAsync($"api/Categories/{id}");
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -108,7 +108,7 @@ public class BlogApiWebClient : IBlogApi
         return null;
 
     }
-    //</Chapter7 CategoriesCalls>
+    //<Chapter7 CategoriesCalls>
 
     //<Chapter7 TagsCalls>
     public async Task<Tag?> GetTagAsync(string id)
@@ -127,7 +127,7 @@ public class BlogApiWebClient : IBlogApi
         try
         {
             var httpclient = _factory.CreateClient("Authenticated");
-            await httpclient.DeleteAsync($"api/Tags{id}");
+            await httpclient.DeleteAsync($"api/Tags/{id}");
         }
         catch (AccessTokenNotAvailableException exception)
         {
