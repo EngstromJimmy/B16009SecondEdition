@@ -1,0 +1,28 @@
+﻿
+@inherits TestContext
+
+@code {
+	[Fact(DisplayName ="Checks if log in is showed")]
+	public void ShouldShowLogin()
+	{
+		this.AddTestAuthorization();
+		// Arrange
+		var cut = Render(@<LoginStatus />);
+        
+		// Assert that the content has 10 article tags (each representing a blogpost)
+		Assert.Equal("Log in",cut.Find("a").InnerHtml);
+	}
+
+	[Fact(DisplayName ="Checks if logout is showed")]
+	public void ShouldShowLogout()
+	{
+		var authContext = this.AddTestAuthorization();
+		authContext.SetAuthorized("Testuser", AuthorizationState.Authorized);
+
+		// Arrange
+		var cut = Render(@<LoginStatus />);
+       
+		// Assert that the content has 10 article tags (each representing a blogpost)
+		Assert.Equal("Log out",cut.Find("a").InnerHtml);
+	}
+}
