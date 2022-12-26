@@ -15,7 +15,7 @@ The source code here on GitHub should be updated.
 -[ ] Repo: RaveDB sample, EF Core sample
 
 ## Chapter 4 - Understanding Basic Blazor Components 
--[ ] New Template
+-[x] New Template
 
 ## Chapter 5 - Creating Advanced Blazor Components 
 -[ ] New Template
