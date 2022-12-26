@@ -5,14 +5,14 @@ There will be small changes in early chapters.
 The source code here on GitHub should be updated.
 
 ## Chapter 1 - Hello Blazor
--[ ] New Template
+- [x] New Template
 
 ## Chapter 2 - Creating your first Blazor App 
--[ ] New Template
+- [x] New Template
 
 ## Chapter 3 - Managing State - Part 1 
--[ ] New Template
--[ ] Repo: RaveDB sample, EF Core sample
+- [x] New Template
+- [ ] Repo: RaveDB sample, EF Core sample
 
 ## Chapter 4 - Understanding Basic Blazor Components 
 -[x] New Template
