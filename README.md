@@ -15,52 +15,53 @@ The source code here on GitHub should be updated.
 - [ ] Repo: RaveDB sample, EF Core sample
 
 ## Chapter 4 - Understanding Basic Blazor Components 
--[x] New Template
+- [x] New Template
 
 ## Chapter 5 - Creating Advanced Blazor Components 
--[ ] New Template
+- [ ] New Template
 
 ## Chapter 6 - Building Forms with Validation
--[ ] New Template
--[ ] Navigation controls
+- [ ] New Template
+- [ ] Navigation controls
+- [ ] Add Get, Set, After (https://learn.microsoft.com/en-us/aspnet/core/blazor/components/data-binding?view=aspnetcore-7.0)
 Changed some things in CategoryList and TagList for reloading lists
 ```
  Items = await _api.GetCategoriesAsync();
 ```
 
 ## Chapter 7 - Creating an API
--[ ] New Template
--[ ] Minimal Api Groups?
+- [ ] New Template
+- [ ] Minimal Api Groups?
 Fixe the Weblient with a / on the DeleteTag and DeleteCategory
 
 ## Chapter 8 - Adding Authentication and Authorization
--[ ] New Template
+- [ ] New Template
 
 ## Chapter 9 - Sharing Code and Resources between Projects
--[ ] New Template
+- [ ] New Template
 
 ## Chapter 10 - Making JavaScript Interop
--[ ] New Template
--[ ] JSImport/JSExport
+- [ ] New Template
+- [ ] JSImport/JSExport
 
 ## Chapter 11 - Managing State - Part 2
--[ ] New Template
+- [ ] New Template
 Add Server pre-rendering and cache, this is a great moment to talk about meta tags for WASM
 
 
 ## Chapter 12 - Debug the Code
--[ ] New Template
+- [ ] New Template
 Running .NET7 p6 I wasn't able to debug the WASM project.  
 Error: No output has been recevied from the application  
 Searching the internet whit was a problem in .NET7 p5 and might not have made it into p6.
 For now I am going to assume this is a preview problem and revisit this later on.
 
 ## Chapter 13 - Test the Code
--[ ] New Template
+- [ ] New Template
 Revisit to see if we need to update the project to .NET7 or not
 
 ## Chapter 14 - Deploy to Production
--[ ] New Template
+- [ ] New Template
 
 ## Chapter 15 - Moving from, or combining an Existing Site 
 No Changes?
